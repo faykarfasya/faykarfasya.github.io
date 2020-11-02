@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <style>
+        style.css .label {
+            float: left;
+            width: 120px;
+        }
+
+        .infobox {
+            width: 200px;
+        }
+
+        .error {
+            color: red;
+            padding-left: 10px;
+        }
+
+        .submit {
+            margin-left: 125px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.error').hide();
+            $('.submit').click(function (event) {
+                var data = $('.infobox').val();
+                var len = data.length;
+                var c = 0;
+                var size = 0;
+                var flag = 0;
+                for (var i = 0; i < len; i++) {
+                    c = data.charAt(i).charCodeAt(0);
+                    if (c < 48 || c > 57) {
+                        $('.error').show();
+                        flag = 1;
+                        event.preventDefault();
+                        break;
+                    } else {
+                        $('.error').hide();
+                    }
+                }
+                if (flag == 0) {
+                    size = parseInt(data);
+                    if (size < 37 || size > 45) {
+                        $('.error').show();
+                        $('.error').text('Size Unavailable. Only Size 37 to 45 only!');
+                        event.preventDefault();
+                    }
+                }
+            });
+        }); 
+    </script>
+    <form id="signup" method="post" action="">
+        <div>
+            <span class="label">Enter Size : </span>
+            <input type="text" class="infobox" name="Size" />
+            <span class="error"> Input Numbers! </span>
+        </div>
+
+        <input class="submit" type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
